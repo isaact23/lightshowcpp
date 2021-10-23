@@ -30,7 +30,7 @@ Color* Rule::operator()(s16 pixel) {
 
 // Primary rules
 
-Rule* Rule::fill(Color color, s16 start=0, s16 end) {
+Rule* Rule::fill(Color color, s16 start, s16 end) {
     Functors::Fill f = Functors::Fill(color, start, end);
     functors.push_back(f);
     return this;
