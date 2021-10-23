@@ -51,7 +51,7 @@ public:
     // Secondary rules
     Rule* animate(double speed);
 private:
-    std::vector<Functors::Base> functors;
+    std::vector<Functors::Base*> functors;
 };
 
 #endif
