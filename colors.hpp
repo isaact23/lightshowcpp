@@ -1,7 +1,9 @@
+// Definitions for colors and sets of colors
+
 #ifndef COLORS_HPP
 #define COLORS_HPP
 
-// Definitions for colors and sets of colors
+#include <stdio.h>
 #include "datatypes.hpp"
 
 struct Color {
@@ -10,23 +12,26 @@ struct Color {
     u8 blue;
 };
 
+// Print a color to the terminal.
+void printColor(Color color);
+
 // Colors
-#define DARK_RED (80, 0, 0)
-#define RED (255, 0, 0)
-#define ORANGE (255, 150, 0)
-#define YELLOW (255, 255, 0)
-#define DARK_GREEN (0, 80, 0)
-#define GREEN (0, 255, 0)
-#define CYAN (0, 255, 255)
-#define DARK_BLUE (0, 0, 80)
-#define BLUE (0, 0, 255)
-#define PURPLE (150, 0, 255)
-#define MAGENTA (255, 0, 255)
-#define PINK (255, 0, 80)
-#define WHITE (255, 255, 255)
-#define GRAY (100, 100, 100)
-#define BLACK (0, 0, 0)
-#define OFF (0, 0, 0)
+#define DARK_RED {80, 0, 0}
+#define RED {255, 0, 0}
+#define ORANGE {255, 150, 0}
+#define YELLOW {255, 255, 0}
+#define DARK_GREEN {0, 80, 0}
+#define GREEN {0, 255, 0}
+#define CYAN {0, 255, 255}
+#define DARK_BLUE {0, 0, 80}
+#define BLUE {0, 0, 255}
+#define PURPLE {150, 0, 255}
+#define MAGENTA {255, 0, 255}
+#define PINK {255, 0, 80}
+#define WHITE {255, 255, 255}
+#define GRAY {100, 100, 100}
+#define BLACK {0, 0, 0}
+#define OFF {0, 0, 0}
 
 /*RAINBOW = (RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE)
 
