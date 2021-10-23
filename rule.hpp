@@ -10,17 +10,17 @@
 namespace Functors {
     class Base {
     public:
-        virtual Color operator()(u16 pixel);
+        virtual void operator()(Color* color, u16 pixel);
     };
 
     class Fill : public Base {
     public:
         // Constructor
-        Fill(Color color, u16 start, u16 end) : color(color), start(start), end(end) {}
+        Fill(Color fillColor, u16 start, u16 end) : fillColor(fillColor), start(start), end(end) {}
         // Color generator
-        Color operator()(u16 pixel);
+        void operator()(Color* color, u16 pixel);
     private:
-        Color color;
+        Color fillColor;
         u16 start;
         u16 end;
     };
@@ -28,7 +28,7 @@ namespace Functors {
     class Stripes : public Base {
     public:
         Stripes(Color* colors, u16 color_count, u16 width) : colors(colors), color_count(color_count), width(width) {}
-        Color operator()(u16 pixel);
+        void operator()(Color* color, u16 pixel);
     private:
         Color* colors;
         u16 color_count;

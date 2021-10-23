@@ -10,7 +10,7 @@ int main() {
 
     Rule* rule1 = new Rule();
     (*rule1).fill(GREEN, 0, 16);
-    Color* newColor = (*rule1)(0);
+    Color* newColor = (*rule1)(8);
     printColor(*newColor);
 
     delete rule1;
