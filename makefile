@@ -1,5 +1,5 @@
-main: main.cpp
-	g++ -ggdb3 -o main main.cpp colors.cpp rule.cpp
+main: src/main.cpp src/colors.cpp src/rule.cpp
+	g++ -ggdb3 -o main src/main.cpp src/colors.cpp src/rule.cpp
 
 .PHONY: main
 

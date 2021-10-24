@@ -18,7 +18,7 @@ namespace Functors {
         // Constructor
         Fill(Color fillColor, u16 start, u16 end) : fillColor(fillColor), start(start), end(end) {}
         // Color generator
-        void operator()(Color* color, u16 pixel);
+        void operator()(Color* color, u16 pixel) override;
     private:
         Color fillColor;
         u16 start;
@@ -28,7 +28,7 @@ namespace Functors {
     class Stripes : public Base {
     public:
         Stripes(Color* colors, u16 color_count, u16 width) : colors(colors), color_count(color_count), width(width) {}
-        void operator()(Color* color, u16 pixel);
+        void operator()(Color* color, u16 pixel) override;
     private:
         Color* colors;
         u16 color_count;

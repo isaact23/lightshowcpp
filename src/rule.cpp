@@ -28,9 +28,9 @@ Color* Rule::operator()(s16 pixel) {
     Color* color = (Color*) calloc(sizeof(Color), 1);
     // Apply each functor to modify the color
     for (std::vector<Functors::Base*>::iterator it = functors.begin(); it != functors.end(); ++it) {
-        Functors::Base func = **it;
+        Functors::Base* func = *it;
         // Modify the pixel color based on the rule
-        func(color, pixel);
+        (*func)(color, pixel);
     }
     return color;
 }
