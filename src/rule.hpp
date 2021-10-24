@@ -34,6 +34,14 @@ namespace Functors {
         u16 color_count;
         u16 width;
     };
+
+    class Animate : public Base {
+    public:
+        Animate(double speed) : speed(speed) {}
+        void operator()(Color* color, u16 pixel) override;
+    private:
+        double speed;
+    };
 }
 
 // Class passable to Segments and LightStrips that determines LED colors at runtime.

@@ -1,6 +1,7 @@
 #include "main.hpp"
-#include "rule.hpp"
 #include "colors.hpp"
+#include "rule.hpp"
+#include "timer.hpp"
 
 int main() {
     Rule rule1 = Rule();
@@ -17,4 +18,9 @@ int main() {
     printColor(*rule2(4));
     printColor(*rule2(5));
     printColor(*rule2(10));
+
+    //auto elapsed = std::chrono::system_clock::now();
+    clock_t start_time = Timer::now();
+    while (Timer::secs_since(start_time) < 5.0) {}
+    printf("Done!\n");
 }
