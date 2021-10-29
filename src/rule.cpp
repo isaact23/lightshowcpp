@@ -44,14 +44,14 @@ Color* Rule::operator()(s16 pixel) {
 // Primary rules
 
 Rule* Rule::fill(Color fillColor, s16 start, s16 end) {
-    functors.clear();
+    //functors.clear();
     Functors::Fill* f = new Functors::Fill(fillColor, start, end);
     functors.push_back(f);
     return this;
 }
 
 Rule* Rule::stripes(Color* colors, u16 color_count, u16 width) {
-    functors.clear();
+    //functors.clear();
     Functors::Stripes* f = new Functors::Stripes(colors, color_count, width);
     functors.push_back(f);
     return this;

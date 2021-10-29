@@ -3,5 +3,5 @@
 #include "rule.hpp"
 
 int main() {
-
+    
 }
