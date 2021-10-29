@@ -54,7 +54,7 @@ class Rule
 public:
     Rule();
     ~Rule();
-    Color* operator()(s16 pixel);
+    Color operator()(s16 pixel);
 
     // Primary rules
     Rule* fill(Color color, s16 start, s16 end);

@@ -17,7 +17,7 @@ void Segment::setRule(Rule* newRule) {
 // Use the Rule assigned by setRule() to generate LED colors.
 void Segment::useRule() {
     for (u16 i = 0; i < end - start; i++) {
-        //pixelColors[i] = (*rule)(i);
+        pixelColors[i] = (*rule)(i);
     }
 }
 
