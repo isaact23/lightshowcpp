@@ -2,7 +2,8 @@
 #define RULE_HPP
 
 #include <stdlib.h>
-#include <string>
+#include <time.h>
+#include <string.h>
 #include <vector>
 #include "colors.hpp"
 #include "datatypes.hpp"
@@ -10,15 +11,15 @@
 namespace Functors {
     class Base {
     public:
-        virtual void operator()(Color* color, u16 pixel);
+        virtual void operator()(Color* color, s16* pixel);
     };
 
     class Fill : public Base {
     public:
         // Constructor
-        Fill(Color fillColor, u16 start, u16 end) : fillColor(fillColor), start(start), end(end) {}
+        Fill(Color fillColor, s16 start, s16 end) : fillColor(fillColor), start(start), end(end) {}
         // Color generator
-        void operator()(Color* color, u16 pixel) override;
+        void operator()(Color* color, s16* pixel) override;
     private:
         Color fillColor;
         u16 start;
@@ -28,7 +29,7 @@ namespace Functors {
     class Stripes : public Base {
     public:
         Stripes(Color* colors, u16 color_count, u16 width) : colors(colors), color_count(color_count), width(width) {}
-        void operator()(Color* color, u16 pixel) override;
+        void operator()(Color* color, s16* pixel) override;
     private:
         Color* colors;
         u16 color_count;
@@ -37,10 +38,13 @@ namespace Functors {
 
     class Animate : public Base {
     public:
-        Animate(double speed) : speed(speed) {}
-        void operator()(Color* color, u16 pixel) override;
+        Animate(double speed) : speed(speed) {
+            startTime = clock();
+        }
+        void operator()(Color* color, s16* pixel) override;
     private:
         double speed;
+        clock_t startTime;
     };
 }
 

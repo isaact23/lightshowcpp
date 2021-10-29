@@ -1,18 +1,23 @@
 #include "rule.hpp"
 
 // Functor operators
-void Functors::Base::operator()(Color* color, u16 pixel) {
+void Functors::Base::operator()(Color* color, s16* pixel) {
     *color = BLACK;
 }
-void Functors::Fill::operator()(Color* color, u16 pixel) {
-    if (pixel >= start && pixel < end) {
+void Functors::Fill::operator()(Color* color, s16* pixel) {
+    if (*pixel >= start && *pixel < end) {
         *color = fillColor;
     } else {
         *color = BLACK;
     }
 }
-void Functors::Stripes::operator()(Color* color, u16 pixel) {
-    *color = colors[(pixel / width) % color_count];
+void Functors::Stripes::operator()(Color* color, s16* pixel) {
+    *color = colors[(*pixel / width) % color_count];
+}
+void Functors::Animate::operator()(Color* color, s16* pixel) {
+    float timeElapsed = ((float)(clock() - startTime)) / CLOCKS_PER_SEC;
+    u16 pixelShift = (u16) timeElapsed * speed;
+    *pixel += pixelShift;
 }
 
 // Rule class methods
@@ -26,11 +31,12 @@ Rule::~Rule() {
 // Evaluate 
 Color* Rule::operator()(s16 pixel) {
     Color* color = (Color*) calloc(sizeof(Color), 1);
+    s16 currentPixel = pixel;
     // Apply each functor to modify the color
     for (std::vector<Functors::Base*>::iterator it = functors.begin(); it != functors.end(); ++it) {
         Functors::Base* func = *it;
         // Modify the pixel color based on the rule
-        (*func)(color, pixel);
+        (*func)(color, &currentPixel);
     }
     return color;
 }

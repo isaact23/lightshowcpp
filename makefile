@@ -1,5 +1,5 @@
-main: src/main.cpp src/colors.cpp src/rule.cpp src/timer.cpp
-	g++ -ggdb3 -o main src/main.cpp src/colors.cpp src/rule.cpp src/timer.cpp
+main: src/main.cpp src/colors.cpp src/rule.cpp
+	g++ -ggdb3 -o main src/main.cpp src/colors.cpp src/rule.cpp
 
 .PHONY: main
 
