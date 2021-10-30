@@ -1,5 +1,7 @@
-main: src/main.cpp src/colors.cpp src/rule.cpp
-	g++ -ggdb3 -o main src/main.cpp src/colors.cpp src/rule.cpp
+files = src/main.cpp src/colors.cpp src/rule.cpp src/grid.cpp src/segment.cpp src/ws2812-rpi/ws2812-rpi.cpp
+
+main: $(files)
+	g++ -ggdb3 -o main $(files)
 
 .PHONY: main
 

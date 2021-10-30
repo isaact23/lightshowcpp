@@ -3,8 +3,9 @@
 // Create a new Grid.
 Grid::Grid() {
     segs = (Segment**) malloc(sizeof(Segment*) * SEG_CNT);
+    neoPixel = new NeoPixel(LED_CNT);
     for (u16 i = 0; i < SEG_CNT; i++) {
-        segs[i] = new Segment(i * 12, (i + 1) * 12);
+        segs[i] = new Segment(neoPixel, i * 12, (i + 1) * 12);
     }
 }
 
@@ -14,6 +15,7 @@ Grid::~Grid() {
         delete segs[i];
     }
     free(segs);
+    delete neoPixel;
 }
 
 // Get a segment by ID.
@@ -25,8 +27,9 @@ Segment* Grid::getSeg(u16 segId) {
 }
 
 // Send Segment LED data to WS2812 LED strip.
-void Grid::write() {
+void Grid::useRule() {
     for (u16 i = 0; i < SEG_CNT; i++) {
-        segs[i] -> write();
+        segs[i] -> useRule();
     }
+    neoPixel -> show();
 }
