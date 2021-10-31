@@ -2,7 +2,7 @@
 #define MAIN_HPP
 
 #include <iostream>
-#include <ctime>
+#include "clock.hpp"
 #include "colors.hpp"
 #include "datatypes.hpp"
 #include "grid.hpp"

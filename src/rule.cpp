@@ -1,27 +1,36 @@
 #include "rule.hpp"
 
 // Functor operators
-void Functors::Base::operator()(Color* color, s16* pixel) {
-    *color = BLACK;
+void Functors::Base::operator()(Functors::Params params) {
+    *(params.color) = BLACK;
 }
-void Functors::Fill::operator()(Color* color, s16* pixel) {
-    if (*pixel >= start && *pixel < end) {
-        *color = fillColor;
+
+Functors::Fill::Fill(Color fillColor, s16 start, s16 end) : fillColor(fillColor), start(start), end(end) {}
+void Functors::Fill::operator()(Functors::Params params) {
+    s16 pixel = *(params.pixel);
+    if (pixel >= start && pixel < end) {
+        *(params.color) = fillColor;
     } else {
-        *color = BLACK;
+        *(params.color) = BLACK;
     }
 }
-void Functors::Stripes::operator()(Color* color, s16* pixel) {
-    *color = colors[(*pixel / width) % color_count];
+
+Functors::Stripes::Stripes(Color* colors, u16 colorCount, u16 width) : colors(colors), colorCount(colorCount), width(width) {}
+void Functors::Stripes::operator()(Functors::Params params) {
+    *(params.color) = colors[(*(params.pixel) / width) % colorCount];
 }
-void Functors::Animate::operator()(Color* color, s16* pixel) {
-    float timeElapsed = ((float)(clock() - startTime)) / CLOCKS_PER_SEC;
-    u16 pixelShift = (u16) timeElapsed * speed;
-    *pixel += pixelShift;
+
+Functors::Animate::Animate(double speed) : speed(speed) {
+    startTime = Clock::now();
+}
+void Functors::Animate::operator()(Functors::Params params) {
+    clock_t currTime = Clock::now();
+    float timeElapsed = Clock::diff_secs(currTime, startTime)
+    s16 pixelShift = (s16) (timeElapsed * speed);
+    *(params.pixel) += pixelShift;
 }
 
 // Rule class methods
-
 Rule::Rule() {
     
 }
@@ -30,13 +39,16 @@ Rule::~Rule() {
 }
 // Evaluate 
 Color Rule::operator()(s16 pixel) {
+    // Set up params to pass to each functor
     Color color = {0, 0, 0};
     s16 currentPixel = pixel;
+    Functors::Params params = {&color, &currentPixel};
+
     // Apply each functor to modify the color
     for (std::vector<Functors::Base*>::iterator it = functors.begin(); it != functors.end(); ++it) {
         Functors::Base* func = *it;
         // Modify the pixel color based on the rule
-        (*func)(&color, &currentPixel);
+        (*func)(params);
     }
     return color;
 }
@@ -50,9 +62,9 @@ Rule* Rule::fill(Color fillColor, s16 start, s16 end) {
     return this;
 }
 
-Rule* Rule::stripes(Color* colors, u16 color_count, u16 width) {
+Rule* Rule::stripes(Color* colors, u16 colorCount, u16 width) {
     //functors.clear();
-    Functors::Stripes* f = new Functors::Stripes(colors, color_count, width);
+    Functors::Stripes* f = new Functors::Stripes(colors, colorCount, width);
     functors.push_back(f);
     return this;
 }

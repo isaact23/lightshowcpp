@@ -5,21 +5,29 @@
 #include <time.h>
 #include <string.h>
 #include <vector>
+#include "clock.hpp"
 #include "colors.hpp"
 #include "datatypes.hpp"
 
+// Function objects that modify the light strip's color output.
 namespace Functors {
+    // Params passable, and oft modifiable, by functors.
+    struct Params {
+        Color* color;
+        s16* pixel;
+    };
+
     class Base {
     public:
-        virtual void operator()(Color* color, s16* pixel);
+        virtual void operator()(Params params);
     };
 
     class Fill : public Base {
     public:
         // Constructor
-        Fill(Color fillColor, s16 start, s16 end) : fillColor(fillColor), start(start), end(end) {}
+        Fill(Color fillColor, s16 start, s16 end);
         // Color generator
-        void operator()(Color* color, s16* pixel) override;
+        void operator()(Params params) override;
     private:
         Color fillColor;
         u16 start;
@@ -28,20 +36,18 @@ namespace Functors {
 
     class Stripes : public Base {
     public:
-        Stripes(Color* colors, u16 color_count, u16 width) : colors(colors), color_count(color_count), width(width) {}
-        void operator()(Color* color, s16* pixel) override;
+        Stripes(Color* colors, u16 colorCount, u16 width);
+        void operator()(Params params) override;
     private:
         Color* colors;
-        u16 color_count;
+        u16 colorCount;
         u16 width;
     };
 
     class Animate : public Base {
     public:
-        Animate(double speed) : speed(speed) {
-            startTime = clock();
-        }
-        void operator()(Color* color, s16* pixel) override;
+        Animate(double speed);
+        void operator()(Params params) override;
     private:
         double speed;
         clock_t startTime;
@@ -58,7 +64,7 @@ public:
 
     // Primary rules
     Rule* fill(Color color, s16 start, s16 end);
-    Rule* stripes(Color* colors, u16 color_count, u16 width);
+    Rule* stripes(Color* colors, u16 colorCount, u16 width);
 
     // Secondary rules
     Rule* animate(double speed);
