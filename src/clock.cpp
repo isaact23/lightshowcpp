@@ -9,3 +9,8 @@ clock_t Clock::now() {
 float Clock::diff_secs(clock_t c2, clock_t c1) {
     return ((float) (c2 - c1)) * 10 / CLOCKS_PER_SEC;
 }
+
+// Get seconds since a clock time
+float Clock::secs_since(clock_t c1) {
+    return Clock::diff_secs(Clock::now(), c1);
+}

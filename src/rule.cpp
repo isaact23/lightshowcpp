@@ -1,34 +1,37 @@
 #include "rule.hpp"
 
 // Functor operators
-void Functors::Base::operator()(Functors::Params params) {
-    *(params.color) = BLACK;
-}
-
-Functors::Fill::Fill(Color fillColor, s16 start, s16 end) : fillColor(fillColor), start(start), end(end) {}
-void Functors::Fill::operator()(Functors::Params params) {
-    s16 pixel = *(params.pixel);
-    if (pixel >= start && pixel < end) {
-        *(params.color) = fillColor;
-    } else {
+namespace Functors {
+    void Base::operator()(Functors::Params params) {
         *(params.color) = BLACK;
+    }
+
+    Fill::Fill(Color fillColor, s16 start, s16 end) : fillColor(fillColor), start(start), end(end) {}
+    void Fill::operator()(Functors::Params params) {
+        s16 pixel = *(params.pixel);
+        if (pixel >= start && pixel < end) {
+            *(params.color) = fillColor;
+        } else {
+            *(params.color) = BLACK;
+        }
+    }
+
+    Stripes::Stripes(Color* colors, u16 colorCount, u16 width) : colors(colors), colorCount(colorCount), width(width) {}
+    void Stripes::operator()(Functors::Params params) {
+        *(params.color) = colors[(*(params.pixel) / width) % colorCount];
+    }
+
+    Animate::Animate(double speed) : speed(speed) {
+        startTime = Clock::now();
+    }
+    void Animate::operator()(Functors::Params params) {
+        clock_t currTime = Clock::now();
+        float timeElapsed = Clock::diff_secs(currTime, startTime);
+        s16 pixelShift = (s16) (timeElapsed * speed);
+        *(params.pixel) += pixelShift;
     }
 }
 
-Functors::Stripes::Stripes(Color* colors, u16 colorCount, u16 width) : colors(colors), colorCount(colorCount), width(width) {}
-void Functors::Stripes::operator()(Functors::Params params) {
-    *(params.color) = colors[(*(params.pixel) / width) % colorCount];
-}
-
-Functors::Animate::Animate(double speed) : speed(speed) {
-    startTime = Clock::now();
-}
-void Functors::Animate::operator()(Functors::Params params) {
-    clock_t currTime = Clock::now();
-    float timeElapsed = Clock::diff_secs(currTime, startTime)
-    s16 pixelShift = (s16) (timeElapsed * speed);
-    *(params.pixel) += pixelShift;
-}
 
 // Rule class methods
 Rule::Rule() {
