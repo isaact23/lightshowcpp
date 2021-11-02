@@ -7,4 +7,5 @@ sounds
 main
 main.exe
 copy.sh
+valgrind.sh
 vlog.txt
