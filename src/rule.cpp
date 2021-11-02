@@ -37,7 +37,8 @@ Rule::Rule() {
     
 }
 Rule::~Rule() {
-
+    // Remove all functors
+    functors.clear();
 }
 // Evaluate 
 Color Rule::operator()(s16 pixel) {
@@ -65,7 +66,6 @@ Rule* Rule::fill(Color fillColor, s16 start, s16 end) {
 }
 
 Rule* Rule::stripes(Color* colors, u16 colorCount, u16 width) {
-    //functors.clear();
     Functors::Stripes* f = new Functors::Stripes(colors, colorCount, width);
     functors.push_back(f);
     return this;
