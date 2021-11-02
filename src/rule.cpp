@@ -74,5 +74,7 @@ Rule* Rule::stripes(Color* colors, u16 colorCount, u16 width) {
 // Secondary rules
 
 Rule* Rule::animate(double speed) {
+    Functors::Animate* f = new Functors::Animate(speed);
+    functors.push_back(f);
     return this;
 }
