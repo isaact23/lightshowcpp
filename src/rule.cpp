@@ -25,8 +25,7 @@ namespace Functors {
         startTime = Clock::now();
     }
     void Animate::operator()(Functors::Params params) {
-        clock_t currTime = Clock::now();
-        float timeElapsed = Clock::diff_secs(currTime, startTime);
+        double timeElapsed = Clock::secs_since(startTime);
         s16 pixelShift = (s16) (timeElapsed * speed);
         *(params.pixel) += pixelShift;
     }

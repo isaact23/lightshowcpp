@@ -50,7 +50,7 @@ namespace Functors {
         void operator()(Params params) override;
     private:
         double speed;
-        clock_t startTime;
+        std::chrono::time_point<std::chrono::steady_clock> startTime;
     };
 }
 

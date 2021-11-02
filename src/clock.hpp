@@ -1,12 +1,13 @@
 #ifndef CLOCK_HPP
 #define CLOCK_HPP
 
-#include <ctime>
+#include <chrono>
 
 namespace Clock {
-    clock_t now(); // Get a clock_t representing the time of the call
-    float diff_secs(clock_t c2, clock_t c1); // Get seconds between two clocks
-    float secs_since(clock_t c1); // Get seconds since a clock time
+    std::chrono::time_point<std::chrono::steady_clock> now(); // Get time representing the time of the call
+    double diff_secs(std::chrono::time_point<std::chrono::steady_clock> c2,
+                     std::chrono::time_point<std::chrono::steady_clock> c1); // Get seconds between two clocks
+    double secs_since(std::chrono::time_point<std::chrono::steady_clock> c1); // Get seconds since a clock time
 }
 
 #endif
