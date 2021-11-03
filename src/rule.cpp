@@ -38,7 +38,9 @@ Rule::Rule() {
 }
 Rule::~Rule() {
     // Remove all functors
-    functors.clear();
+    for (std::vector<Functors::Base*>::iterator it = functors.begin(); it != functors.end(); ++it) {
+        delete *it;
+    }
 }
 // Evaluate 
 Color Rule::operator()(s16 pixel) {
