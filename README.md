@@ -1,3 +1,2 @@
-# squidgame  
-This code (re-written in C++) powers a light show for "Glass Stepping Stones" from Squid Game. 
-Python is simply too inefficient for the task at hand.
+# lightshowcpp  
+The goal of this repo is to simplify light show programming and to run efficiently on even the slowest of hardware (*cough* raspberry pi *cough*)
