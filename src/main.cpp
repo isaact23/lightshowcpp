@@ -2,8 +2,12 @@
 
 int main() {
     // Set up
+    #ifdef USE_NEOPIXEL
     NeoPixel* neoPixel = new NeoPixel(LED_CNT);
     Segment mainSeg = Segment(neoPixel, 0, LED_CNT);
+    #else
+    Segment mainSeg = Segment(0, LED_CNT);
+    #endif
 
     // Initialize rule
     Color colors[2] = {GREEN, PURPLE};
@@ -22,5 +26,7 @@ int main() {
 
     std::cout << "Done!" << std::endl;
 
+    #ifdef USE_NEOPIXEL
     delete neoPixel;
+    #endif
 }

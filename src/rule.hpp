@@ -11,7 +11,7 @@
 
 // Function objects that modify the light strip's color output.
 namespace Functors {
-    // Params passable, and oft modifiable, by functors.
+    // Params passable to functors, and oft modifiable by functors.
     struct Params {
         Color* color;
         s16* pixel;

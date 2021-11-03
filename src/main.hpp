@@ -9,7 +9,10 @@
 #include "datatypes.hpp"
 #include "rule.hpp"
 #include "segment.hpp"
+
+#ifdef USE_NEOPIXEL
 #include "ws2812-rpi/ws2812-rpi.h"
+#endif
 
 #define FRAMERATE 60
 
