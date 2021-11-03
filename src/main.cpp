@@ -17,14 +17,9 @@ int main() {
     auto startTime = Clock::now();
     float timeElapsed = 0.0;
 
-    while (Clock::secs_since(startTime) < 5.0) {
+    while (Clock::secs_since(startTime) < 0.1) {
         mainSeg.useRule();
-
-        timeElapsed = Clock::secs_since(startTime);
-        std::cout << Clock::secs_since(startTime) << std::endl;
     }
-
-    std::cout << "Done!" << std::endl;
 
     #ifdef USE_NEOPIXEL
     delete neoPixel;

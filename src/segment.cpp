@@ -2,10 +2,12 @@
 
 // Create a new segment between start (inclusive) and end (exclusive).
 #ifdef USE_NEOPIXEL
-Segment::Segment(NeoPixel* neoPixel, u16 start, u16 end) : neoPixel(neoPixel), start(start), end(end) {}
+Segment::Segment(NeoPixel* neoPixel, u16 start, u16 end) : neoPixel(neoPixel), start(start), end(end) {
 #else
-Segment::Segment(u16 start, u16 end) : start(start), end(end) {}
+Segment::Segment(u16 start, u16 end) : start(start), end(end) {
 #endif
+    rule = NULL;
+}
 
 // Destroy a Segment.
 Segment::~Segment() {
