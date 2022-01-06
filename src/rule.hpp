@@ -15,6 +15,7 @@ namespace Functors {
     struct Params {
         Color* color;
         s16* pixel;
+        float* timeElapsed;
     };
 
     class Base {
@@ -60,7 +61,7 @@ class Rule
 public:
     Rule();
     ~Rule();
-    Color operator()(s16 pixel);
+    Color operator()(s16 pixel, float timeElapsed);
 
     // Primary rules
     Rule* fill(Color color, s16 start, s16 end);

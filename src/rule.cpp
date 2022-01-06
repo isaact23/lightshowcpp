@@ -43,11 +43,12 @@ Rule::~Rule() {
     }
 }
 // Evaluate 
-Color Rule::operator()(s16 pixel) {
+Color Rule::operator()(s16 pixel, float timeElapsed) {
     // Set up params to pass to each functor
     Color color = {0, 0, 0};
     s16 currentPixel = pixel;
-    Functors::Params params = {&color, &currentPixel};
+    float timeSinceStart = timeElapsed;
+    Functors::Params params = {&color, &currentPixel, &timeSinceStart};
 
     // Apply each functor to modify the color
     for (std::vector<Functors::Base*>::iterator it = functors.begin(); it != functors.end(); ++it) {

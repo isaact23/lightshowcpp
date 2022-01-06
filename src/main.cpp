@@ -4,6 +4,7 @@ int main() {
     // Set up
     #ifdef USE_NEOPIXEL
     NeoPixel* neoPixel = new NeoPixel(LED_CNT);
+    neoPixel -> begin();
     Segment mainSeg = Segment(neoPixel, 0, LED_CNT);
     #else
     Segment mainSeg = Segment(0, LED_CNT);
@@ -17,9 +18,12 @@ int main() {
     auto startTime = Clock::now();
     float timeElapsed = 0.0;
 
-    while (Clock::secs_since(startTime) < 0.1) {
-        mainSeg.useRule();
+    while (timeElapsed < 5.0) {
+        mainSeg.useRule(timeElapsed);
+        neoPixel -> show();
+        timeElapsed = Clock::secs_since(startTime);
     }
+    neoPixel -> clear();
 
     #ifdef USE_NEOPIXEL
     delete neoPixel;
