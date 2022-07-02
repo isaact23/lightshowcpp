@@ -11,7 +11,7 @@ int main() {
 
     // Initialize rule
     Color colors[2] = {GREEN, PURPLE};
-    Rule* movingStripes = (new Rule()) -> stripes(colors, 2, 10) -> animate(3.0);
+    Rule* movingStripes = (new Rule()) -> animate(8.0) -> stripes(colors, 2, 10);
     mainSeg.setRule(movingStripes);
 
     auto startTime = Clock::now();
