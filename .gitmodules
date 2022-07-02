@@ -1,3 +1,6 @@
 [submodule "src/ws2812-rpi"]
 	path = src/ws2812-rpi
 	url = https://github.com/isaact23/ws2812-rpi
+[submodule "src/ws2812-dma"]
+	path = src/ws2812-dma
+	url = https://github.com/isaact23/ws2812-dma

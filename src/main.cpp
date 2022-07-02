@@ -4,6 +4,7 @@ using namespace std;
 int main() {
     #ifdef USE_NEOPIXEL
     NeoPixel* neoPixel = new NeoPixel(LED_CNT);
+    neoPixel -> begin();
     Segment mainSeg = Segment(neoPixel, 0, LED_CNT);
     #else
     Segment mainSeg = Segment(0, LED_CNT);
@@ -17,9 +18,9 @@ int main() {
     auto startTime = Clock::now();
     float timeElapsed = 0.0;
 
-    while (Clock::secs_since(startTime) < 5.0) {
-        mainSeg.useRule();
-
+    while (timeElapsed < 5.0) {
+        mainSeg.useRule(timeElapsed);
+        neoPixel -> show();
         timeElapsed = Clock::secs_since(startTime);
         // cout << Clock::secs_since(startTime) << endl;
         
@@ -31,8 +32,10 @@ int main() {
     }
 
     cout << "Done!" << endl;
+    }
 
     #ifdef USE_NEOPIXEL
+    neoPixel -> clear();
     delete neoPixel;
     #endif
 }
