@@ -27,6 +27,8 @@ public:
     ~Segment(); // Destroy a Segment.
     void setRule(Rule* newRule); // Assign a Rule for LED color generation to this Segment.
     void useRule(float timeElapsed); // Use the Rule assigned by setRule() to generate LED colors and update WS2812 LED strip.
+    Color getColor(int p); // Get the color of pixel p
+
 private:
     #ifdef USE_NEOPIXEL
     NeoPixel* neoPixel;

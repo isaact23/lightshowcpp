@@ -5,10 +5,9 @@ int main() {
     #ifdef USE_NEOPIXEL
     NeoPixel* neoPixel = new NeoPixel(LED_CNT);
     neoPixel -> begin();
-    Segment mainSeg = Segment(neoPixel, 0, LED_CNT);
-    #else
-    Segment mainSeg = Segment(0, LED_CNT);
     #endif
+    
+    Segment mainSeg = Segment(0, LED_CNT);
 
     // Initialize rule
     Color colors[2] = {GREEN, PURPLE};
@@ -20,7 +19,6 @@ int main() {
 
     while (timeElapsed < 5.0) {
         mainSeg.useRule(timeElapsed);
-        neoPixel -> show();
         timeElapsed = Clock::secs_since(startTime);
         // cout << Clock::secs_since(startTime) << endl;
         
@@ -28,11 +26,11 @@ int main() {
         
         #ifdef USE_NEOPIXEL
         //neoPixel -> setPixelColor(i, color.red, color.green, color.blue);
+        neoPixel -> show();
         #endif
     }
 
     cout << "Done!" << endl;
-    }
 
     #ifdef USE_NEOPIXEL
     neoPixel -> clear();
