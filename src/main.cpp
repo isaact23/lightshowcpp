@@ -1,7 +1,7 @@
+using namespace std;
 #include "main.hpp"
 
 int main() {
-    // Set up
     #ifdef USE_NEOPIXEL
     NeoPixel* neoPixel = new NeoPixel(LED_CNT);
     Segment mainSeg = Segment(neoPixel, 0, LED_CNT);
@@ -21,10 +21,16 @@ int main() {
         mainSeg.useRule();
 
         timeElapsed = Clock::secs_since(startTime);
-        std::cout << Clock::secs_since(startTime) << std::endl;
+        // cout << Clock::secs_since(startTime) << endl;
+        
+        printColor(mainSeg.getColor(0));
+        
+        #ifdef USE_NEOPIXEL
+        //neoPixel -> setPixelColor(i, color.red, color.green, color.blue);
+        #endif
     }
 
-    std::cout << "Done!" << std::endl;
+    cout << "Done!" << endl;
 
     #ifdef USE_NEOPIXEL
     delete neoPixel;
