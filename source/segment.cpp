@@ -1,9 +1,9 @@
 #include "segment.hpp"
 
 // Create a new segment between start (inclusive) and end (exclusive).
-Segment::Segment(u16 start, u16 end) : start(start), end(end) {
+Segment::Segment(NeoPixel* n, u16 start, u16 end) : start(start), end(end) {
+    neoPixel = n;
     rule = NULL;
-    colors = (Color*) calloc(end - start, sizeof(Color));
 }
 
 // Destroy a Segment.
@@ -25,12 +25,8 @@ void Segment::useRule(float timeElapsed) {
     if (rule != NULL) {
         for (u16 i = start; i < end; i++) {
             Color color = (*rule)(i - start, timeElapsed);
-            colors[i] = color;
+            neoPixel -> setPixelColor(i, color.red, color.green, color.blue);
         }
     }
 }
 
-// Get the color of pixel p
-Color Segment::getColor(int p) {
-    return colors[p];
-}

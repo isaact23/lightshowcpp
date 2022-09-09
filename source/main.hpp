@@ -10,6 +10,7 @@
 #include "rule.hpp"
 #include "segment.hpp"
 
+#define USE_NEOPIXEL
 #ifdef USE_NEOPIXEL
 #include "ws2812-rpi/ws2812-rpi.h"
 #endif
