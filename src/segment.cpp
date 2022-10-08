@@ -1,7 +1,17 @@
 #include "segment.hpp"
 
-// Create a new segment between start (inclusive) and end (exclusive).
-Segment::Segment(NeoPixel* n, u16 start, u16 end) : start(start), end(end) {
+// Create a new segment between start (inclusive) and end (exclusive) with rules starting at initPixel.
+Segment::Segment(NeoPixel* n, u16 startInput, u16 endInput, u16 initPixel) {
+    if (endInput >= startInput) {
+        start = startInput;
+        end = endInput;
+        flipped = false;
+    } else {
+        start = endInput;
+        end = startInput;
+        flipped = true;
+    }
+
     neoPixel = n;
     rule = NULL;
 }

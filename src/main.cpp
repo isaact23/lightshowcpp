@@ -2,28 +2,28 @@ using namespace std;
 #include "main.hpp"
 
 int main() {
+    // Initialize Neopixel
     #ifdef USE_NEOPIXEL
     NeoPixel* neoPixel = new NeoPixel(LED_CNT);
     neoPixel -> begin();
     #endif
     
-    Segment mainSeg = Segment(neoPixel, 0, LED_CNT);
+    Grid* grid = new Grid(neoPixel);
 
-    // Initialize rule
-    Color colors[2] = {GREEN, PURPLE};
-    Rule* movingStripes = (new Rule()) -> animate(8.0) -> stripes(colors, 2, 10);
-    mainSeg.setRule(movingStripes);
+    Color colors[6] = {RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE};
+    Rule* movingStripes = (new Rule()) -> animate(15.0) -> stripes(colors, 6, 10);
+
+    grid -> setRule(movingStripes);
 
     auto startTime = Clock::now();
     float timeElapsed = 0.0;
 
     while (timeElapsed < 5.0) {
-        mainSeg.useRule(timeElapsed);
+        grid -> useRule(timeElapsed);
         timeElapsed = Clock::secs_since(startTime);
         // cout << Clock::secs_since(startTime) << endl;
         
         #ifdef USE_NEOPIXEL
-        //neoPixel -> setPixelColor(i, color.red, color.green, color.blue);
         neoPixel -> show();
         #endif
     }

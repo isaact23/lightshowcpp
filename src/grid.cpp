@@ -1,11 +1,11 @@
 #include "grid.hpp"
 
 // Create a new Grid.
-Grid::Grid() {
+Grid::Grid(NeoPixel* neoPixel) : neoPixel(neoPixel) {
+
     segs = (Segment**) malloc(sizeof(Segment*) * SEG_CNT);
-    neoPixel = new NeoPixel(LED_CNT);
     for (u16 i = 0; i < SEG_CNT; i++) {
-        segs[i] = new Segment(neoPixel, i * 12, (i + 1) * 12);
+        segs[i] = new Segment(neoPixel, i * SEG_SIZE, ((i + 1) * SEG_SIZE) - 1);
     }
 }
 
@@ -26,10 +26,15 @@ Segment* Grid::getSeg(u16 segId) {
     return segs[segId];
 }
 
-// Send Segment LED data to WS2812 LED strip.
-void Grid::useRule() {
+void Grid::setRule(Rule* rule) { // Set all segment rules to one rule.
     for (u16 i = 0; i < SEG_CNT; i++) {
-        segs[i] -> useRule();
+        segs[i] -> setRule(rule);
     }
-    neoPixel -> show();
+}
+
+// Send Segment LED data to WS2812 LED strip.
+void Grid::useRule(float timeElapsed) {
+    for (u16 i = 0; i < SEG_CNT; i++) {
+        segs[i] -> useRule(timeElapsed);
+    }
 }

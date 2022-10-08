@@ -18,9 +18,9 @@ A range of pixels that has its own Rule.
 class Segment {
 
 public:
-    // Create a new segment on a NeoPixel strip between start (inclusive) and end (exclusive).
+    // Create a new segment on a NeoPixel strip between start (inclusive) and end (exclusive) with rules starting at initPixel.
     #ifdef USE_NEOPIXEL
-    Segment(NeoPixel* neoPixel, u16 start, u16 end);
+    Segment(NeoPixel* neoPixel, u16 start, u16 end, u16 initPixel);
     #else
     Segment(u16 start, u16 end);
     #endif
@@ -34,6 +34,7 @@ private:
     #endif
     u16 start;
     u16 end;
+    bool flipped;
     Rule* rule;
 };
 
