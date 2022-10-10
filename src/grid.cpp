@@ -9,8 +9,8 @@ Grid::Grid(NeoPixel* neoPixel) : neoPixel(neoPixel) {
     segs[0] = new Segment(neoPixel, 0, 49);
     segs[1] = new Segment(neoPixel, 99, 50);
 
-    for (u16 i = 0; i < SEG_CNT - 2; i++) {
-        segs[i] = new Segment(neoPixel, 100 + i * SEG_SIZE, 99 + ((i + 1) * SEG_SIZE));
+    for (u16 i = 2; i < SEG_CNT; i++) {
+        segs[i] = new Segment(neoPixel, 100 + (i - 2) * SEG_SIZE, 99 + ((i - 1) * SEG_SIZE));
     }
 }
 
