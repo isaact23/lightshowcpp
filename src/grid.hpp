@@ -7,10 +7,8 @@
 #include "segment.hpp"
 #include "ws2812-rpi/ws2812-rpi.h"
 
-#define SEG_CNT 3
-//#define SEG_CNT 44
+#define SEG_CNT 42
 #define SEG_SIZE 12
-#define LED_CNT 150
 
 /*
 * Container class for all Segments in the game.

@@ -11,9 +11,9 @@ int main() {
     Grid* grid = new Grid(neoPixel);
 
     Color colors[6] = {RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE};
-    Rule* movingStripes = (new Rule()) -> animate(15.0) -> stripes(colors, 6, 10);
+    Rule* movingStripes = (new Rule()) -> animate(4.0) -> stripes(colors, 6, 4);
 
-    grid -> setRule(movingStripes);
+    grid -> getSeg(0) -> setRule(movingStripes);
 
     auto startTime = Clock::now();
     float timeElapsed = 0.0;

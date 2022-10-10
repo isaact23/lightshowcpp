@@ -1,7 +1,7 @@
 #ifndef MAIN_HPP
 #define MAIN_HPP
 
-#define LED_CNT 150
+#define LED_CNT 580
 
 #include <iostream>
 #include "clock.hpp"

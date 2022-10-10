@@ -4,8 +4,13 @@
 Grid::Grid(NeoPixel* neoPixel) : neoPixel(neoPixel) {
 
     segs = (Segment**) malloc(sizeof(Segment*) * SEG_CNT);
-    for (u16 i = 0; i < SEG_CNT; i++) {
-        segs[i] = new Segment(neoPixel, i * SEG_SIZE, ((i + 1) * SEG_SIZE) - 1);
+
+    // Sides
+    segs[0] = new Segment(neoPixel, 0, 49);
+    segs[1] = new Segment(neoPixel, 99, 50);
+
+    for (u16 i = 0; i < SEG_CNT - 2; i++) {
+        segs[i] = new Segment(neoPixel, 100 + i * SEG_SIZE, 99 + ((i + 1) * SEG_SIZE));
     }
 }
 
