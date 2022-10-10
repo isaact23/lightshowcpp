@@ -16,7 +16,7 @@ int main() {
     grid -> getSeg(0) -> setRule(movingStripesRule);
     grid -> getSeg(1) -> setRule(movingStripesRule);
 
-    Rule* solidColorRule = (new Rule) -> fill(BLUE, 0, 1000);
+    Rule* solidColorRule = (new Rule()) -> fill(BLUE, 0, 1000);
 
     for (u16 i = 2; i < SEG_CNT; i++) {
         grid -> getSeg(i) -> setRule(solidColorRule);
