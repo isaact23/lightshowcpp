@@ -35,9 +35,6 @@ void printColor(Color color);
 
 /*RAINBOW = (RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE)
 
-# Schools
-VT = ((50, 10, 0), (255, 80, 0))
-
 # Countries
 USA = (RED, WHITE, BLUE)
 GERMANY = (OFF, RED, YELLOW)
