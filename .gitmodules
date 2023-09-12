@@ -4,3 +4,6 @@
 [submodule "src/ws2812-dma"]
 	path = src/ws2812-dma
 	url = https://github.com/isaact23/ws2812-dma
+[submodule "src/ws2812-esp32"]
+	path = src/ws2812-esp32
+	url = https://github.com/Freenove/Freenove_WS2812_Lib_for_ESP32
