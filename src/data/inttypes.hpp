@@ -1,5 +1,5 @@
-#ifndef DATATYPES_HPP
-#define DATATYPES_HPP
+#ifndef INTTYPES_HPP
+#define INTTYPES_HPP
 
 #include <stdint.h>
 

@@ -1,7 +1,7 @@
 #include "segment.hpp"
 
 // Create a new segment between start (inclusive) and end (inclusive).
-Segment::Segment(NeoPixel* n, u16 startInput, u16 endInput) {
+Segment::Segment(Strip* strip, u16 startInput, u16 endInput) {
     if (endInput >= startInput) {
         start = startInput;
         end = endInput;
@@ -12,8 +12,7 @@ Segment::Segment(NeoPixel* n, u16 startInput, u16 endInput) {
         flipped = true;
     }
 
-    neoPixel = n;
-    initPixel = 0; // Starting pixel for color calculation (changes for MultiSegments)
+    this.strip = strip;
     rule = NULL;
 }
 
@@ -22,11 +21,6 @@ Segment::~Segment() {
     if (rule != NULL) {
         delete rule;
     }
-}
-
-// Update initPixel.
-void Segment::setInitPixel(u16 initPixel) {
-    initPixel = initPixel;
 }
 
 // Assign a Rule for LED color generation to this Segment.
@@ -42,8 +36,7 @@ void Segment::useRule(float timeElapsed) {
     if (rule != NULL) {
         for (u16 i = start; i < end; i++) {
             Color color = (*rule)(i - start, timeElapsed);
-            neoPixel -> setPixelColor(i, color.red, color.green, color.blue);
+            strip -> setPixelColor(i, color.red, color.green, color.blue);
         }
     }
 }
-

@@ -7,7 +7,7 @@
 #include <vector>
 #include "clock.hpp"
 #include "colors.hpp"
-#include "datatypes.hpp"
+#include "inttypes.hpp"
 
 // Function objects that modify the light strip's color output.
 namespace Functors {
