@@ -7,6 +7,13 @@ which each contain multiple segments.
 */
 class SonusLogo {
 
+public:
+  SonusLogo();
+  ~SonusLogo();
+
+private:
+
+
 }
 
 #endif
